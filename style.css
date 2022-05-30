@@ -1,0 +1,33 @@
+body {
+    display:grid;
+    grid-template-rows: 10vh 80vh 10vh;
+    margin: 0;
+    padding:0;
+}
+
+.header {
+    background-color: #0ea5e9;
+    grid-row: 1/2;
+
+}
+
+.footer{
+    background-color: #0ea5e9;
+    grid-row: 3/4;
+}
+
+.container{
+    grid-row:2/3;
+    display:grid;
+}
+
+.card{
+width: auto;
+height: auto;
+background-color: aqua;
+}
+
+.title{
+font-style: italic;
+}
+
