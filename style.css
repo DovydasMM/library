@@ -64,3 +64,8 @@ form{
 input{
     width: 150px;
 }
+
+.removeButton{
+    width: 60px;
+    height: auto;
+}
