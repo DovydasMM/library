@@ -73,17 +73,12 @@ function addNewBook(){
 
 
 
-
-
-const buttonSubmit = document.querySelector('.buttonSubmit')
-buttonSubmit.addEventListener('click', () => {
+function submitForm(){
     let newBook = new Book(bookTitle.value, bookAuthor.value, bookPageCount.value)
     myLibrary.push(newBook);
     addNewBook();
     bookTitle.value ='';
     bookAuthor.value='';
     bookPageCount.value ='';
-    
-});
-
+}
 
