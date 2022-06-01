@@ -15,6 +15,7 @@ this.info = function(){
 
 function addBookToLibrary() {
     let newBookIndex=myLibrary.length-1;
+    bookIndex +=1;
     cardCreation(myLibrary[newBookIndex].title, myLibrary[newBookIndex].author,myLibrary[newBookIndex].numberOfPages, myLibrary[newBookIndex].status)
 }
 
@@ -26,7 +27,7 @@ function cardCreation(title, author, numberOfPages, status){
     let card=document.createElement('div');
     card.classList.add('card')
     
-    card.dataset.set=bookIndex;
+    card.dataset.set=Number(bookIndex);
 
     //title
     titleOfBook=document.createElement('div');
@@ -68,7 +69,10 @@ function cardCreation(title, author, numberOfPages, status){
     //button for deleting DOM card
     function deleteCard(){
         removeButton.addEventListener('click', function (e) {
-            container.removeChild(card);
+            console.log(card.dataset.set);
+            myLibrary.splice(card.dataset.set, 1);
+            updateTable();
+            //container.removeChild(card);
           });
     }
 
@@ -79,8 +83,9 @@ function cardCreation(title, author, numberOfPages, status){
 
     function changeOfStatus(){
         statusChange.addEventListener('click', function (e) {
-            //Book.changeOfStatus();
-            console.log(e)
+            console.log(myLibrary[card.dataset.set].title)
+            myLibrary[card.dataset.set].changeStatus();
+            
           });
     }
 
@@ -118,6 +123,7 @@ myLibrary.push(book4)
 
 function fillContainer(){
     for (book in myLibrary){
+        bookIndex=book;
         cardCreation(myLibrary[book].title, myLibrary[book].author,myLibrary[book].numberOfPages, myLibrary[book].status)
     }
 }
