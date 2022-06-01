@@ -22,6 +22,17 @@
     <input type="number" id="pageCount" >
     <button type="submit" class="buttonSubmit">Submit</button>
 
+    <div class="bookStatus">
+      <div>
+        <input type="radio" id="unfinished" name="status" value="Unfinished" onclick="statusOfTheBook=this.value" required>
+        <label for="unfinished">Unfinished</label>
+
+        
+        <input type="radio" id="finished" name="status" value="Finished" onclick="statusOfTheBook=this.value">
+        <label for="finished">Finished</label>
+      </div>
+    </div>
+
     
   </form>
 </div>

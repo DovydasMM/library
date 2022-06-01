@@ -15,13 +15,13 @@ this.info = function(){
 
 function addBookToLibrary() {
     let newBookIndex=myLibrary.length-1;
-    cardCreation(myLibrary[newBookIndex].title, myLibrary[newBookIndex].author,myLibrary[newBookIndex].numberOfPages, newBookIndex)
+    cardCreation(myLibrary[newBookIndex].title, myLibrary[newBookIndex].author,myLibrary[newBookIndex].numberOfPages, myLibrary[newBookIndex].status)
 }
 
 
 //Function for DOM manipulation. It takes info from 
 
-function cardCreation(title, author, numberOfPages, bookIndex){
+function cardCreation(title, author, numberOfPages, status){
     
     let card=document.createElement('div');
     card.classList.add('card')
@@ -42,6 +42,15 @@ function cardCreation(title, author, numberOfPages, bookIndex){
     pageCount=document.createElement('div');
     pageCount.classList.add('pages')
     pageCount.textContent=numberOfPages + " pages";
+
+    //status
+
+    bookStatus=document.createElement('div');
+    bookStatus.classList.add('status')
+    bookStatus.textContent="Book status: " +status;
+
+
+
 
     //remove button
     removeButton=document.createElement('button');
@@ -65,6 +74,7 @@ function cardCreation(title, author, numberOfPages, bookIndex){
     card.appendChild(titleOfBook)
     card.appendChild(authorOfBook)
     card.appendChild(pageCount)
+    card.appendChild(bookStatus)
     card.appendChild(removeButton)
 
     //appends the created card to the container
@@ -73,9 +83,9 @@ function cardCreation(title, author, numberOfPages, bookIndex){
 
 }
 
-const book2 = new Book("Don Quixote","Miguel de Cervantes", 1077, "not read");
-const book3 = new Book("1984","George Orwell", 328, "fully read");
-const book4 = new Book("The Count of Monte Cristo","Alexandre Dumas", 884, "fully read");
+const book2 = new Book("Don Quixote","Miguel de Cervantes", 1077, "Unfinished");
+const book3 = new Book("1984","George Orwell", 328, "Finished");
+const book4 = new Book("The Count of Monte Cristo","Alexandre Dumas", 884, "Finished");
 
 
 myLibrary.push(book2)
@@ -85,8 +95,7 @@ myLibrary.push(book4)
 
 function fillContainer(){
     for (book in myLibrary){
-        bookIndex = book;
-        cardCreation(myLibrary[book].title, myLibrary[book].author,myLibrary[book].numberOfPages, bookIndex)
+        cardCreation(myLibrary[book].title, myLibrary[book].author,myLibrary[book].numberOfPages, myLibrary[book].status)
     }
 }
 fillContainer();
@@ -94,22 +103,23 @@ fillContainer();
 const bookTitle = form.elements['bookTitle']
 const bookAuthor = form.elements['bookAuthor']
 const bookPageCount = form.elements['pageCount']
+let statusOfTheBook;
 
-function addNewBook(){
 
-}
+
+
 
 function submitForm(){
-    let newBook = new Book(bookTitle.value, bookAuthor.value, bookPageCount.value)
+    let newBook = new Book(bookTitle.value, bookAuthor.value, bookPageCount.value, statusOfTheBook)
     myLibrary.push(newBook);
     addBookToLibrary();
     bookTitle.value ='';
     bookAuthor.value='';
     bookPageCount.value ='';
-}
+    const unfinishedButton = document.getElementById('unfinished');
+    const finishedButton = document.getElementById('finished');
+    unfinishedButton.checked = false;
+    finishedButton.checked = false;
 
-function deleteCard(){
-    removeButton.addEventListener('click', function (e) {
-        console.log(card.dataset);
-      });
+
 }
