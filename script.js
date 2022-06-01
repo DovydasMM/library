@@ -1,8 +1,16 @@
 const container = document.querySelector(".container");
 const form = document.getElementById('addBook');
+const bookTitle = form.elements['bookTitle']
+const bookAuthor = form.elements['bookAuthor']
+const bookPageCount = form.elements['pageCount']
+
+
+let statusOfTheBook;
 let bookIndex;
 let myLibrary = [];
 
+
+//Book constructor
 function Book(title,author, numberOfPages, status) {
 this.author = author
 this.title = title
@@ -20,8 +28,7 @@ function addBookToLibrary() {
 }
 
 
-//Function for DOM manipulation. It takes info from 
-
+//Function for creating DOM elements and implementing them on screen
 function cardCreation(title, author, numberOfPages, status){
     
     let card=document.createElement('div');
@@ -50,51 +57,36 @@ function cardCreation(title, author, numberOfPages, status){
     bookStatus.classList.add('status')
     bookStatus.textContent="Book status: " +status;
 
-
-
-
     //remove button
     removeButton=document.createElement('button');
     removeButton.classList.add('removeButton');
     removeButton.textContent='Delete';
-
 
     //status button
     statusChange=document.createElement('button');
     statusChange.classList.add('statusChange');
     statusChange.textContent='Status';    
     
-
-    
-    //button for deleting DOM card
+    //button for deleting DOM card element
     function deleteCard(){
         removeButton.addEventListener('click', function (e) {
             console.log(card.dataset.set);
             myLibrary.splice(card.dataset.set, 1);
             updateTable();
-            //container.removeChild(card);
           });
     }
 
-
-
-
     //button for status change
-
     function changeOfStatus(){
         statusChange.addEventListener('click', function (e) {
-            console.log(myLibrary[card.dataset.set].title)
             myLibrary[card.dataset.set].changeStatus();
             
           });
     }
 
+    
     deleteCard();
     changeOfStatus();
-    
-    
-    
-
     
     
     //appending info to cards
@@ -111,14 +103,15 @@ function cardCreation(title, author, numberOfPages, status){
 
 }
 
+
+//books to fill container
 const book2 = new Book("Don Quixote","Miguel de Cervantes", 1077, "Unfinished");
 const book3 = new Book("1984","George Orwell", 328, "Finished");
 const book4 = new Book("The Count of Monte Cristo","Alexandre Dumas", 884, "Finished");
-
-
 myLibrary.push(book2)
 myLibrary.push(book3)
 myLibrary.push(book4)
+//
 
 
 function fillContainer(){
@@ -129,15 +122,12 @@ function fillContainer(){
 }
 fillContainer();
 
-const bookTitle = form.elements['bookTitle']
-const bookAuthor = form.elements['bookAuthor']
-const bookPageCount = form.elements['pageCount']
-let statusOfTheBook;
 
 
 
 
 
+//take info from sumbitions
 function submitForm(){
     let newBook = new Book(bookTitle.value, bookAuthor.value, bookPageCount.value, statusOfTheBook)
     myLibrary.push(newBook);
@@ -152,7 +142,7 @@ function submitForm(){
 
 
 }
-
+//updates all table, by removing every card and putting new ones in
 function updateTable(){
     while (container.firstChild) {
         container.removeChild(container.lastChild);
@@ -162,7 +152,7 @@ function updateTable(){
 
 
 
-
+//Prototype change, to implement status change
 Book.prototype.changeStatus = function(){
     if (this.status == "Unfinished"){
         this.status = "Finished"
