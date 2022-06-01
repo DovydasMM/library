@@ -13,6 +13,26 @@ this.info = function(){
 }
 }
 
+Book.prototype.sayStatus = function(){
+    console.log(this.status)
+}
+
+Book.prototype.changeStatus = function(){
+    console.log(this.name)
+    if (this.status == "Unfinished"){
+        console.log('Bra')
+        this.status = "Finished"
+        bookStatus.textContent="Book status: " +this.status
+    }
+    else {
+            this.status = "Unfinished"
+            bookStatus.textContent="Book status: " +this.status
+        }
+    }
+
+
+
+
 function addBookToLibrary() {
     let newBookIndex=myLibrary.length-1;
     cardCreation(myLibrary[newBookIndex].title, myLibrary[newBookIndex].author,myLibrary[newBookIndex].numberOfPages, myLibrary[newBookIndex].status)
@@ -56,14 +76,36 @@ function cardCreation(title, author, numberOfPages, status){
     removeButton=document.createElement('button');
     removeButton.classList.add('removeButton');
     removeButton.textContent='Delete';
+
+
+    //remove button
+    statusChange=document.createElement('button');
+    statusChange.classList.add('statusChange');
+    statusChange.textContent='Status';    
     
+
     
+    //button for deleting DOM card
     function deleteCard(){
         removeButton.addEventListener('click', function (e) {
             container.removeChild(card);
           });
     }
+
+
+
+
+    //button for status change
+
+    function changeOfStatus(){
+        statusChange.addEventListener('click', function (e) {
+            
+            console.log(e)
+          });
+    }
+
     deleteCard();
+    changeOfStatus();
     
     
     
@@ -76,6 +118,7 @@ function cardCreation(title, author, numberOfPages, status){
     card.appendChild(pageCount)
     card.appendChild(bookStatus)
     card.appendChild(removeButton)
+    card.appendChild(statusChange)
 
     //appends the created card to the container
     container.appendChild(card);
@@ -123,3 +166,4 @@ function submitForm(){
 
 
 }
+
