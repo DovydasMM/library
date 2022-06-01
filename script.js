@@ -13,26 +13,6 @@ this.info = function(){
 }
 }
 
-Book.prototype.sayStatus = function(){
-    console.log(this.status)
-}
-
-Book.prototype.changeStatus = function(){
-    console.log(this.name)
-    if (this.status == "Unfinished"){
-        console.log('Bra')
-        this.status = "Finished"
-        bookStatus.textContent="Book status: " +this.status
-    }
-    else {
-            this.status = "Unfinished"
-            bookStatus.textContent="Book status: " +this.status
-        }
-    }
-
-
-
-
 function addBookToLibrary() {
     let newBookIndex=myLibrary.length-1;
     cardCreation(myLibrary[newBookIndex].title, myLibrary[newBookIndex].author,myLibrary[newBookIndex].numberOfPages, myLibrary[newBookIndex].status)
@@ -78,7 +58,7 @@ function cardCreation(title, author, numberOfPages, status){
     removeButton.textContent='Delete';
 
 
-    //remove button
+    //status button
     statusChange=document.createElement('button');
     statusChange.classList.add('statusChange');
     statusChange.textContent='Status';    
@@ -99,7 +79,7 @@ function cardCreation(title, author, numberOfPages, status){
 
     function changeOfStatus(){
         statusChange.addEventListener('click', function (e) {
-            
+            //Book.changeOfStatus();
             console.log(e)
           });
     }
@@ -167,3 +147,22 @@ function submitForm(){
 
 }
 
+function updateTable(){
+    while (container.firstChild) {
+        container.removeChild(container.lastChild);
+    }
+    fillContainer()
+}
+
+
+
+
+Book.prototype.changeStatus = function(){
+    if (this.status == "Unfinished"){
+        this.status = "Finished"
+    }
+    else {
+            this.status = "Unfinished"
+        }
+    updateTable()
+    }
