@@ -15,7 +15,7 @@ this.info = function(){
 
 function addBookToLibrary() {
     let newBookIndex=myLibrary.length-1;
-    bookIndex +=1;
+    bookIndex = Number(bookIndex)+1;
     cardCreation(myLibrary[newBookIndex].title, myLibrary[newBookIndex].author,myLibrary[newBookIndex].numberOfPages, myLibrary[newBookIndex].status)
 }
 
