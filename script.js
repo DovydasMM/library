@@ -15,7 +15,7 @@ this.info = function(){
 
 function addBookToLibrary() {
     let newBookIndex=myLibrary.length-1;
-    cardCreation(myLibrary[newBookIndex].title, myLibrary[newBookIndex].author,myLibrary[newBookIndex].numberOfPages)
+    cardCreation(myLibrary[newBookIndex].title, myLibrary[newBookIndex].author,myLibrary[newBookIndex].numberOfPages, newBookIndex)
 }
 
 
@@ -47,7 +47,14 @@ function cardCreation(title, author, numberOfPages, bookIndex){
     removeButton=document.createElement('button');
     removeButton.classList.add('removeButton');
     removeButton.textContent='Delete';
-    deleteCard()
+    
+    
+    function deleteCard(){
+        removeButton.addEventListener('click', function (e) {
+            container.removeChild(card);
+          });
+    }
+    deleteCard();
     
     
     
@@ -104,7 +111,5 @@ function submitForm(){
 function deleteCard(){
     removeButton.addEventListener('click', function (e) {
         console.log(card.dataset);
-        
-
       });
 }
