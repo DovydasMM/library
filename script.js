@@ -39,12 +39,12 @@ function cardCreation(title, author, numberOfPages, status){
     //title
     titleOfBook=document.createElement('div');
     titleOfBook.classList.add('title')
-    titleOfBook.textContent="The title is: "+ title
+    titleOfBook.textContent=title
 
     //author
     authorOfBook=document.createElement('div');
     authorOfBook.classList.add('author')
-    authorOfBook.textContent="Author: " +author;
+    authorOfBook.textContent="By " +author;
     
     //pages
     pageCount=document.createElement('div');
@@ -57,16 +57,35 @@ function cardCreation(title, author, numberOfPages, status){
     bookStatus.classList.add('status')
     bookStatus.textContent="Book status: " +status;
 
+
+
+    //button section
+    buttonSection=document.createElement('div');
+    buttonSection.classList.add('buttonSection');
+
     //remove button
     removeButton=document.createElement('button');
     removeButton.classList.add('removeButton');
-    removeButton.textContent='Delete';
+    removeButton.textContent='✘';
 
     //status button
+
+
+
+
+
     statusChange=document.createElement('button');
     statusChange.classList.add('statusChange');
-    statusChange.textContent='Status';    
-    
+    if (status=="Finished"){
+        statusChange.textContent = "Read"
+        statusChange.classList.add('read')
+
+    } else {
+        statusChange.textContent = "Not Read"
+        statusChange.classList.add('notRead')
+    }
+     
+
     //button for deleting DOM card element
     function deleteCard(){
         removeButton.addEventListener('click', function (e) {
@@ -94,8 +113,10 @@ function cardCreation(title, author, numberOfPages, status){
     card.appendChild(authorOfBook)
     card.appendChild(pageCount)
     card.appendChild(bookStatus)
-    card.appendChild(removeButton)
-    card.appendChild(statusChange)
+    card.appendChild(buttonSection)
+    buttonSection.appendChild(statusChange)
+    buttonSection.appendChild(removeButton)
+    
 
     //appends the created card to the container
     container.appendChild(card);
